@@ -61,10 +61,15 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
     self.encode_ltr_delim = encode_ltr_delim
 
   """
+  # this does not follow documentation: https://docs.python.org/2/library/doctest.html
+  This is an example 
+
   >>> coder = MorseCodeDictionaryEncoder()
   >>> print(coder.decode("..."))
   f
+  
   """
+
   def decode(self, message):
     """
     >>> coder = MorseCodeDictionaryEncoder()
@@ -74,3 +79,7 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
     self.invert()
     return self.encode_message(message)
 
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
