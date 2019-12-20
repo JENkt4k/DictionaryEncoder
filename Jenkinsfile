@@ -22,12 +22,12 @@ pipeline {
             dir('DictionaryEncoder') {
               script {
                 try {
+                  sh 'py.test --junitxml ../test-reports/results-test_morse-$BUILD_NUMBER.xml ../tests/test_morse.py'
                   sh 'py.test --junitxml ../test-reports/results-test_DictionaryEncoder-$BUILD_NUMBER.xml ../tests/test_DictionaryEncoder.py'
                   sh 'py.test --junitxml ../test-reports/results-test_MorseCodeDictionaryEncoder-$BUILD_NUMBER.xml ../tests/test_MorseCodeDictionaryEncoder.py'
-                  sh 'py.test --junitxml ../test-reports/results-test_morse-$BUILD_NUMBER.xml ../tests/test_morse.py'
                 } catch (Exception e) {
                   echo e.getMessage()
-                  echo "Lint failed"
+                  echo "pytest failed"
                 }
               } 
             }    
