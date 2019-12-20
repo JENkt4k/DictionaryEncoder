@@ -60,3 +60,17 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
     self.ltr_delim = ltr_delim
     self.encode_ltr_delim = encode_ltr_delim
 
+  """
+  >>> coder = MorseCodeDictionaryEncoder()
+  >>> print(coder.decode("..."))
+  f
+  """
+  def decode(self, message):
+    """
+    >>> coder = MorseCodeDictionaryEncoder()
+    >>> print(coder.decode("..."))
+    s
+    """
+    self.invert()
+    return self.encode_message(message)
+
