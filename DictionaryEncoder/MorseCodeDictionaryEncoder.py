@@ -69,11 +69,11 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
   >>> coder = MorseCodeDictionaryEncoder()
   >>> print(coder.decode("..."))
   f
-  
   """
-
   def decode(self, message):
     """
+    This test is exxecuted as expected:
+
     >>> coder = MorseCodeDictionaryEncoder()
     >>> print(coder.decode("..."))
     s
