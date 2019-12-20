@@ -15,19 +15,6 @@ pipeline {
           sh 'pip install -r ./requirements.txt'
       }
     }
-    stage('Sonarqube') {
-      environment {
-        scannerHome = tool 'SonarQubeScanner'
-      }
-      steps {
-        withSonarQubeEnv('sonarqube') {
-          sh "${scannerHome}/bin/sonar-scanner"
-        }
-        timeout(time: 30, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
-        }
-      }
-    }
     stage('Unit Test'){
       parallel {
         stage('pytest'){
@@ -43,6 +30,19 @@ pipeline {
               }
             }     
           }
+        }
+      }
+    }
+    stage('Sonarqube') {
+      environment {
+        scannerHome = tool 'SonarQubeScanner'
+      }
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 30, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
         }
       }
     }
