@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append('../DictionaryEncoder/')
 from morse import * #code_morse
 
 class TestCases(unittest.TestCase):

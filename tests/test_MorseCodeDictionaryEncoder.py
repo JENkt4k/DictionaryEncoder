@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append('../DictionaryEncoder/')
 from MorseCodeDictionaryEncoder import MorseCodeDictionaryEncoder
 
 class TestCases(unittest.TestCase):

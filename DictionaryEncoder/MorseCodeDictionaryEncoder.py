@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../DictionaryEncoder/')
 from DictionaryEncoder import DictionaryEncoder
 
 MORSE_DICT = { #  ' ':' ', this is our delimeter, lets not include it

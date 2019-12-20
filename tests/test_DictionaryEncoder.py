@@ -1,5 +1,8 @@
 import unittest
+import sys
+sys.path.append('../DictionaryEncoder/')
 from DictionaryEncoder import DictionaryEncoder
+
 
 MORSE_DICT = {
   'a':'...',
