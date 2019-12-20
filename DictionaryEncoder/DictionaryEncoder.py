@@ -14,7 +14,7 @@ class DictionaryEncoder:
   def encode_word(self, word):
     letters = []
     if '' == self.ltr_delim: #special case for empty split
-      letters = list(word) #treat as "split everything" strings to all characters
+      letters = list(word) #treat as "split everything" strings converted to list of all characters
     else:
       letters = word.split(self.ltr_delim)
     return self.encode_ltr_delim.join(list(map(lambda letter: self.swap(letter), letters)))
