@@ -1,6 +1,6 @@
 class DictionaryEncoder:
 
-  def __init__(self, dictionary, word_delim = ' ', encoded_word_delim = '|', ltr_delim = '', encode_ltr_delim = ' '):
+  def __init__(self, dictionary, word_delim, encoded_word_delim, ltr_delim, encode_ltr_delim ):
     self.dictionary = dictionary
     self.word_delim = word_delim
     self.encoded_word_delim = encoded_word_delim
@@ -13,8 +13,8 @@ class DictionaryEncoder:
 
   def encode_word(self, word):
     letters = []
-    if '' == self.ltr_delim:
-      letters = list(word)
+    if '' == self.ltr_delim: #special case for empty split
+      letters = list(word) #treat as "split everything" strings to all characters
     else:
       letters = word.split(self.ltr_delim)
     return self.encode_ltr_delim.join(list(map(lambda letter: self.swap(letter), letters)))
