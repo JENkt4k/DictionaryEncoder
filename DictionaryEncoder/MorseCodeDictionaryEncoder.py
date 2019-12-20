@@ -55,6 +55,8 @@ MORSE_DICT = { #  ' ':' ', this is our delimeter, lets not include it
 class MorseCodeDictionaryEncoder(DictionaryEncoder):
   def __init__(self, word_delim = ' ', encoded_word_delim = '|', ltr_delim = '', encode_ltr_delim = ' '):
     self.dictionary = MORSE_DICT 
+    #in case dictionary inversion takes a long time, lets just store the inverse for reuse and swap
+    self.inverted_dict = self.invert_dictionary(self.dictionary) 
     self.word_delim = word_delim
     self.encoded_word_delim = encoded_word_delim
     self.ltr_delim = ltr_delim
@@ -76,8 +78,13 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
     >>> print(coder.decode("..."))
     s
     """
-    self.invert()
-    return self.encode_message(message)
+    self.swap_dictionary()
+    decoded = self.encode_message(message)
+    self.swap_dictionary()
+    return decoded
+  
+  def swap_dictionary(self):
+    self.dictionary, self.inverted_dict = self.inverted_dict, self.dictionary
 
 
 if __name__ == "__main__":

@@ -32,6 +32,9 @@ class DictionaryEncoder:
     self.encode_ltr_delim = swap
     self.dictionary = {value: key for key, value in self.dictionary.items()}
 
+  def invert_dictionary(self, dictionary):
+    return {value: key for key, value in dictionary.items()}
+
 
   
 
