@@ -8,19 +8,20 @@ class DictionaryEncoder:
     self.encode_ltr_delim = encode_ltr_delim
     
 
-  def swap(self, letter):
+  def swap(self, letter, dictionary = None):
+    self.dictionary = (dictionary,self.dictionary)[dictionary == None]
     return self.dictionary[letter]
 
-  def encode_word(self, word):
+  def encode_word(self, word, dictionary = None):
     letters = []
     if '' == self.ltr_delim: #special case for empty split
       letters = list(word) #treat as "split everything" strings converted to list of all characters
     else:
       letters = word.split(self.ltr_delim)
-    return self.encode_ltr_delim.join(list(map(lambda letter: self.swap(letter), letters)))
+    return self.encode_ltr_delim.join(list(map(lambda letter: self.swap(letter, dictionary), letters)))
 
-  def encode_message(self, message):
-    result = self.encoded_word_delim.join(list(map( lambda word: self.encode_word(word), message.split(self.word_delim))))
+  def encode_message(self, message, dictionary = None):
+    result = self.encoded_word_delim.join(list(map( lambda word: self.encode_word(word, dictionary), message.split(self.word_delim))))
     return result
 
   def invert(self):

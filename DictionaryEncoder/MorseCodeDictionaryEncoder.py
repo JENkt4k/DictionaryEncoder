@@ -78,14 +78,7 @@ class MorseCodeDictionaryEncoder(DictionaryEncoder):
     >>> print(coder.decode("..."))
     s
     """
-    self.swap_dictionary()
-    decoded = self.encode_message(message)
-    self.swap_dictionary()
-    return decoded
-  
-  def swap_dictionary(self):
-    self.dictionary, self.inverted_dict = self.inverted_dict, self.dictionary
-
+    return self.encode_message(message,self.inverted_dict)
 
 if __name__ == "__main__":
     import doctest
