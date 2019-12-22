@@ -1,7 +1,9 @@
 import unittest
 import sys
-sys.path.append('../DictionaryEncoder/')
-from morse import * #code_morse
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+#from morse import * #code_morse
+from DictionaryEncoder import morse
 
 class TestCases(unittest.TestCase):
   def test_case_code_morse(self):
