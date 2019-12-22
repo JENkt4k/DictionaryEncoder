@@ -35,7 +35,7 @@ pipeline {
         }
         stage('coverage'){
           steps{
-            dir('DictionaryEncoder/test-reports') {
+            dir('test-reports') {
               script {
                 try {
                   sh 'coverage erase'
