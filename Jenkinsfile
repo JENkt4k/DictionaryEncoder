@@ -51,9 +51,9 @@ pipeline {
   }
   post {
     always {            
-      archiveArtifacts 'DictionaryEncoder/test-reports/*.xml'
-      junit 'DictionaryEncoder/test-reports/*.xml'
-      dir('DictionaryEncoder/test-reports'){ 
+      archiveArtifacts 'test-reports/*.xml'
+      junit 'test-reports/*.xml'
+      dir('test-reports'){ 
         deleteDir()
       }      
     }
