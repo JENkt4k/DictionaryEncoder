@@ -33,6 +33,22 @@ pipeline {
             }    
           }
         }
+        stage('coverage'){
+          steps{
+            dir('DictionaryEncoder/test-reports') {
+              script {
+                try {
+                  sh 'coverage erase'
+                  sh 'coverage run -m unittest discover -s ../tests'
+                  sh 'coverage xml -i'
+                } catch (Exception e) {
+                  echo e.getMessage()
+                  echo "coverage failed"
+                }
+              } 
+            }    
+          }
+        }
       }
     }
     stage('Sonarqube') {
