@@ -1,10 +1,15 @@
 import unittest
+
+# Check for the module we are testing to see if its already installed, if append path to find it
 import os
 import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import imp
+try:
+    imp.find_module('DictionaryEncoder')
+except ImportError:
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))) 
 
 from DictionaryEncoder import DictionaryEncoder
-
 
 MORSE_DICT = {
   'a':'...',

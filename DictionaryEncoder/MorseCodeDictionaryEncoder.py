@@ -1,5 +1,8 @@
+#import sys
+#sys.path.append('../DictionaryEncoder/')
+import os
 import sys
-sys.path.append('../DictionaryEncoder/')
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DictionaryEncoder import DictionaryEncoder as de
 
 MORSE_DICT = { #  ' ':' ', this is our delimeter, lets not include it
@@ -55,8 +58,6 @@ MORSE_DICT = { #  ' ':' ', this is our delimeter, lets not include it
 class MorseCodeDictionaryEncoder(de.DictionaryEncoder):
   def __init__(self, word_delim = ' ', encoded_word_delim = '|', ltr_delim = '', encode_ltr_delim = ' '):
     self.dictionary = MORSE_DICT 
-    #in case dictionary inversion takes a long time, lets just store the inverse for reuse and swap
-    self.inverted_dict = self.invert_dictionary(self.dictionary) 
     self.word_delim = word_delim
     self.encoded_word_delim = encoded_word_delim
     self.ltr_delim = ltr_delim
@@ -78,7 +79,10 @@ class MorseCodeDictionaryEncoder(de.DictionaryEncoder):
     >>> print(coder.decode("..."))
     s
     """
-    return self.encode_message(message,self.inverted_dict)
+    self.invert() #invert the directory and delimiters
+    result = self.encode_message(message)
+    self.invert() # revert so that encoding works, we may want to just create an Encoder/Decoder object instead of this
+    return result
 
 if __name__ == "__main__":
     import doctest
